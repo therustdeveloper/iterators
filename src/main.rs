@@ -11,6 +11,7 @@ fn main() {
 
     vector_elements();
     into_iterator();
+    iter_method();
 }
 
 fn triangle(n: i32) -> i32 {
@@ -45,5 +46,14 @@ fn into_iterator() {
     let mut iterator = (&v).into_iter();
     while let Some(element) = iterator.next() {
         println!("{}", element);
+    }
+}
+
+fn iter_method() {
+    let v = vec![17, 7, 27, 37, 57, 47];
+    let mut iterator = v.iter();
+    // the while finish when iterator.next() returns None
+    while let Some(value) = iterator.next() {
+        println!("value: {}", value);
     }
 }
