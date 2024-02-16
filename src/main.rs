@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 fn main() {
     println!("--- Range Inclusive ---");
     let mut sum_positive = triangle(7);
@@ -13,6 +15,7 @@ fn main() {
     into_iterator();
     iter_method();
     map_adapter();
+    string_with_filter_map();
 }
 
 fn triangle(n: i32) -> i32 {
@@ -74,3 +77,12 @@ fn map_adapter() {
     println!("vector v: {:?}", v);
 }
 
+fn string_with_filter_map() {
+    let text = "1\nfrond .25  289\n3.1415 estuary\n";
+
+    for number in text
+        .split_whitespace()
+        .filter_map(|w| f64::from_str(w).ok()) {
+        println!("{:4.2}", number.sqrt());
+    }
+}
