@@ -12,6 +12,7 @@ fn main() {
     vector_elements();
     into_iterator();
     iter_method();
+    map_adapter();
 }
 
 fn triangle(n: i32) -> i32 {
@@ -57,3 +58,19 @@ fn iter_method() {
         println!("value: {}", value);
     }
 }
+
+fn map_adapter() {
+    let text = "  ponies  \n  giraffes\niguanas\nsquid".to_string();
+
+    // - text.lines() call returns an iterator that produces the string's lines.
+    // - calling map on that iterator returns a second iterator that applies str::trim to each line and produces the results as its items.
+    // - collect gathers those items into a vector
+    let v: Vec<&str> = text.lines()
+        .map(str::trim)
+        .filter(|s| *s != "iguanas")
+        .map(|s| &*Box::leak(s.to_uppercase().into_boxed_str()))
+        .collect();
+
+    println!("vector v: {:?}", v);
+}
+
